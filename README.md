@@ -30,14 +30,6 @@
 - ✅ Icon rotation effects
 - ✅ Scale animations on buttons and cards
 
-### Sound Effects (Optional)
-- ✅ Success sound for safe emails
-- ✅ Warning sound for suspicious emails
-- ✅ Danger sound for phishing emails
-- ✅ Click sounds for interactions
-- ✅ Notification sounds for achievements
-- ✅ Toggle button to mute/unmute
-
 ## 🚀 **Interactive Features**
 
 ### Analysis Tools
