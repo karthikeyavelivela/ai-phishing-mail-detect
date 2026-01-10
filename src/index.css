@@ -2,73 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    /* New Palette: #FFDAB3 (Peach), #C8AAAA (Rosy Brown), #9F8383 (Mauve), #574964 (Dark Eggplant) */
-    --background: 26 100% 85%;
-    /* #FFDAB3 Peach */
-    --foreground: 272 16% 34%;
-    /* #574964 Dark Eggplant - High Contrast Text */
+    /* New Palette: #67B2D8 (Light Blue), #BF124D (Pink/Red), #76153C (Maroon), #5A0E24 (Dark Burgundy BG) */
+    --background: 343 73% 20%;
+    /* #5A0E24 Dark Burgundy */
+    --foreground: 200 60% 63%;
+    /* #67B2D8 Light Blue - High Contrast Text */
 
-    --card: 26 100% 92%;
-    /* Lighter version of peach for cards */
-    --card-foreground: 272 16% 34%;
+    --card: 336 70% 27%;
+    /* #76153C Maroon for cards */
+    --card-foreground: 200 60% 63%;
 
-    --popover: 26 100% 92%;
-    --popover-foreground: 272 16% 34%;
+    --popover: 336 70% 27%;
+    --popover-foreground: 200 60% 63%;
 
-    --primary: 272 16% 34%;
-    /* #574964 Dark Eggplant - Primary Action */
-    --primary-foreground: 26 100% 95%;
+    --primary: 340 83% 41%;
+    /* #BF124D Vibrant Pink/Red */
+    --primary-foreground: 200 60% 95%;
+    /* Very light blue/white for primary text */
 
-    --secondary: 0 23% 73%;
-    /* #C8AAAA Rosy Brown */
-    --secondary-foreground: 272 16% 20%;
+    --secondary: 336 70% 27%;
+    /* Maroon */
+    --secondary-foreground: 200 60% 63%;
 
-    --muted: 0 13% 57%;
-    /* #9F8383 Mauve */
-    --muted-foreground: 272 16% 34%;
+    --muted: 336 50% 20%;
+    /* Darker maroon for muted areas */
+    --muted-foreground: 200 40% 50%;
 
-    --accent: 0 23% 73%;
-    /* Rosy Brown */
-    --accent-foreground: 272 16% 34%;
+    --accent: 340 83% 41%;
+    /* Pink Accents */
+    --accent-foreground: 200 60% 95%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 13% 57%;
-    /* Mauve border */
-    --input: 0 13% 57%;
-    --ring: 272 16% 34%;
+    --border: 340 83% 41%;
+    /* Pink border */
+    --input: 336 70% 20%;
+    --ring: 340 83% 41%;
 
     --radius: 1rem;
 
-    --success: 142 76% 35%;
-    /* Darker success for contrast on peach */
+    --success: 142 70% 45%;
     --warning: 38 92% 50%;
     --danger: 0 84% 60%;
 
-    /* Glassmorphism Gradients - Warmer Tones */
-    --gradient-primary: linear-gradient(135deg, hsl(272 16% 34%) 0%, hsl(0 13% 57%) 100%);
-    --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 230, 210, 0.4) 100%);
-    --gradient-subtle: linear-gradient(180deg, rgba(255, 218, 179, 0.5) 0%, rgba(255, 218, 179, 0.2) 100%);
+    /* Glassmorphism Gradients - Dark Theme */
+    --gradient-primary: linear-gradient(135deg, hsl(340 83% 41%) 0%, hsl(336 70% 27%) 100%);
+    --gradient-card: linear-gradient(180deg, rgba(118, 21, 60, 0.7) 0%, rgba(90, 14, 36, 0.4) 100%);
+    --gradient-subtle: linear-gradient(180deg, rgba(103, 178, 216, 0.1) 0%, rgba(103, 178, 216, 0.05) 100%);
 
-    --shadow-glow: 0 8px 32px hsl(272 16% 34% / 0.15);
-    --shadow-card: 0 8px 32px 0 rgba(87, 73, 100, 0.1);
-    --shadow-subtle: 0 4px 16px rgba(87, 73, 100, 0.05);
+    --shadow-glow: 0 8px 32px hsl(340 83% 41% / 0.25);
+    --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.2);
 
-    --sidebar-background: 26 100% 85%;
-    --sidebar-foreground: 272 16% 34%;
-    --sidebar-primary: 272 16% 34%;
-    --sidebar-primary-foreground: 26 100% 95%;
-    --sidebar-accent: 0 23% 73%;
-    --sidebar-accent-foreground: 272 16% 34%;
-    --sidebar-border: 0 13% 57%;
-    --sidebar-ring: 272 16% 34%;
+    --sidebar-background: 343 73% 20%;
+    --sidebar-foreground: 200 60% 63%;
+    --sidebar-primary: 340 83% 41%;
+    --sidebar-primary-foreground: 200 60% 95%;
+    --sidebar-accent: 336 70% 27%;
+    --sidebar-accent-foreground: 200 60% 63%;
+    --sidebar-border: 340 83% 41%;
+    --sidebar-ring: 340 83% 41%;
   }
 
   /* Dark mode overrides removed to enforce requested palette */
