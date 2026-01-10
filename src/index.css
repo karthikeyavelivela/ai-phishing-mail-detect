@@ -8,67 +8,67 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* New Palette: #67B2D8 (Light Blue), #BF124D (Pink/Red), #76153C (Maroon), #5A0E24 (Dark Burgundy BG) */
-    --background: 343 73% 20%;
-    /* #5A0E24 Dark Burgundy */
-    --foreground: 200 60% 63%;
-    /* #67B2D8 Light Blue - High Contrast Text */
+    /* New Palette: #F5E7C6 (Cream), #3A2525 (Dark Brown), #41644A (Hunter Green) */
+    --background: 42 70% 87%;
+    /* #F5E7C6 Cream/Beige */
+    --foreground: 0 22% 19%;
+    /* #3A2525 Dark Brown */
 
-    --card: 336 70% 27%;
-    /* #76153C Maroon for cards */
-    --card-foreground: 200 60% 63%;
+    --card: 42 70% 92%;
+    /* Lighter cream for cards */
+    --card-foreground: 0 22% 19%;
 
-    --popover: 336 70% 27%;
-    --popover-foreground: 200 60% 63%;
+    --popover: 42 70% 92%;
+    --popover-foreground: 0 22% 19%;
 
-    --primary: 340 83% 41%;
-    /* #BF124D Vibrant Pink/Red */
-    --primary-foreground: 200 60% 95%;
-    /* Very light blue/white for primary text */
+    --primary: 136 21% 32%;
+    /* #41644A Hunter Green */
+    --primary-foreground: 42 70% 95%;
+    /* Very light cream */
 
-    --secondary: 336 70% 27%;
-    /* Maroon */
-    --secondary-foreground: 200 60% 63%;
+    --secondary: 0 22% 19%;
+    /* Dark Brown as secondary */
+    --secondary-foreground: 42 70% 87%;
 
-    --muted: 336 50% 20%;
-    /* Darker maroon for muted areas */
-    --muted-foreground: 200 40% 50%;
+    --muted: 136 21% 25%;
+    /* Darker green for muted */
+    --muted-foreground: 0 22% 40%;
 
-    --accent: 340 83% 41%;
-    /* Pink Accents */
-    --accent-foreground: 200 60% 95%;
+    --accent: 136 21% 32%;
+    /* Green Accent */
+    --accent-foreground: 42 70% 87%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 340 83% 41%;
-    /* Pink border */
-    --input: 336 70% 20%;
-    --ring: 340 83% 41%;
+    --border: 136 21% 32%;
+    /* Green border */
+    --input: 136 21% 32%;
+    --ring: 136 21% 32%;
 
     --radius: 1rem;
 
-    --success: 142 70% 45%;
-    --warning: 38 92% 50%;
-    --danger: 0 84% 60%;
+    --success: 142 70% 35%;
+    --warning: 38 92% 40%;
+    --danger: 0 84% 50%;
 
-    /* Glassmorphism Gradients - Dark Theme */
-    --gradient-primary: linear-gradient(135deg, hsl(340 83% 41%) 0%, hsl(336 70% 27%) 100%);
-    --gradient-card: linear-gradient(180deg, rgba(118, 21, 60, 0.7) 0%, rgba(90, 14, 36, 0.4) 100%);
-    --gradient-subtle: linear-gradient(180deg, rgba(103, 178, 216, 0.1) 0%, rgba(103, 178, 216, 0.05) 100%);
+    /* Glassmorphism Gradients - Vintage/Earthy */
+    --gradient-primary: linear-gradient(135deg, hsl(136 21% 32%) 0%, hsl(0 22% 19%) 100%);
+    --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(245, 231, 198, 0.4) 100%);
+    --gradient-subtle: linear-gradient(180deg, rgba(65, 100, 74, 0.1) 0%, rgba(65, 100, 74, 0.05) 100%);
 
-    --shadow-glow: 0 8px 32px hsl(340 83% 41% / 0.25);
-    --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-glow: 0 8px 32px hsl(136 21% 32% / 0.15);
+    --shadow-card: 0 8px 32px 0 rgba(58, 37, 37, 0.1);
+    --shadow-subtle: 0 4px 16px rgba(58, 37, 37, 0.05);
 
-    --sidebar-background: 343 73% 20%;
-    --sidebar-foreground: 200 60% 63%;
-    --sidebar-primary: 340 83% 41%;
-    --sidebar-primary-foreground: 200 60% 95%;
-    --sidebar-accent: 336 70% 27%;
-    --sidebar-accent-foreground: 200 60% 63%;
-    --sidebar-border: 340 83% 41%;
-    --sidebar-ring: 340 83% 41%;
+    --sidebar-background: 42 70% 87%;
+    --sidebar-foreground: 0 22% 19%;
+    --sidebar-primary: 136 21% 32%;
+    --sidebar-primary-foreground: 42 70% 95%;
+    --sidebar-accent: 0 22% 19%;
+    --sidebar-accent-foreground: 42 70% 87%;
+    --sidebar-border: 136 21% 32%;
+    --sidebar-ring: 136 21% 32%;
   }
 
   /* Dark mode overrides removed to enforce requested palette */
