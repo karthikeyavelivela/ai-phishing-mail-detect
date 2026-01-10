@@ -29,7 +29,7 @@ const tourSteps: TourStep[] = [
   },
   {
     title: 'Advanced Features',
-    description: 'Try comparison mode, radar charts, heat maps, and AI assistant for deeper insights.',
+    description: 'Try comparison mode, radar charts, heat maps, and Security assistant for deeper insights.',
     icon: Sparkles
   }
 ];
@@ -74,7 +74,7 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
             className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50"
             onClick={handleSkip}
           />
-          
+
           {/* Tour Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -97,11 +97,11 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
                 {/* Icon */}
                 <div className="flex justify-center mb-4">
                   <motion.div
-                    animate={{ 
+                    animate={{
                       rotate: [0, 10, -10, 0],
                       scale: [1, 1.1, 1.1, 1]
                     }}
-                    transition={{ 
+                    transition={{
                       duration: 2,
                       repeat: Infinity,
                       repeatDelay: 1
@@ -130,11 +130,10 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
                         scale: index === currentStep ? 1.2 : 1,
                         opacity: index === currentStep ? 1 : 0.3
                       }}
-                      className={`h-2 rounded-full transition-all ${
-                        index === currentStep 
-                          ? 'w-8 bg-primary' 
+                      className={`h-2 rounded-full transition-all ${index === currentStep
+                          ? 'w-8 bg-primary'
                           : 'w-2 bg-muted-foreground'
-                      }`}
+                        }`}
                     />
                   ))}
                 </div>

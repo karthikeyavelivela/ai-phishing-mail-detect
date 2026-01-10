@@ -8,68 +8,70 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 25% 6%;
-    --foreground: 210 40% 98%;
+    /* New Palette: #FFDAB3 (Peach), #C8AAAA (Rosy Brown), #9F8383 (Mauve), #574964 (Dark Eggplant) */
+    --background: 26 100% 85%;
+    /* #FFDAB3 Peach */
+    --foreground: 272 16% 34%;
+    /* #574964 Dark Eggplant - High Contrast Text */
 
-    --card: 220 22% 11%;
-    --card-foreground: 210 40% 98%;
+    --card: 26 100% 92%;
+    /* Lighter version of peach for cards */
+    --card-foreground: 272 16% 34%;
 
-    --popover: 220 22% 12%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 26 100% 92%;
+    --popover-foreground: 272 16% 34%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 220 25% 6%;
+    --primary: 272 16% 34%;
+    /* #574964 Dark Eggplant - Primary Action */
+    --primary-foreground: 26 100% 95%;
 
-    --secondary: 217 30% 18%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 23% 73%;
+    /* #C8AAAA Rosy Brown */
+    --secondary-foreground: 272 16% 20%;
 
-    --muted: 217 30% 20%;
-    --muted-foreground: 215 20% 70%;
+    --muted: 0 13% 57%;
+    /* #9F8383 Mauve */
+    --muted-foreground: 272 16% 34%;
 
-    --accent: 268 100% 70%;
-    --accent-foreground: 220 25% 6%;
+    --accent: 0 23% 73%;
+    /* Rosy Brown */
+    --accent-foreground: 272 16% 34%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217 30% 20%;
-    --input: 217 30% 18%;
-    --ring: 217 91% 60%;
+    --border: 0 13% 57%;
+    /* Mauve border */
+    --input: 0 13% 57%;
+    --ring: 272 16% 34%;
 
-    --radius: 0.875rem;
-    
-    --success: 142 76% 45%;
-    --warning: 38 92% 55%;
+    --radius: 1rem;
+
+    --success: 142 76% 35%;
+    /* Darker success for contrast on peach */
+    --warning: 38 92% 50%;
     --danger: 0 84% 60%;
-    
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(268 100% 70%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(220 22% 13%) 0%, hsl(220 22% 9%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(220 25% 8%) 0%, hsl(220 25% 6%) 100%);
-    --shadow-glow: 0 8px 32px hsl(217 91% 60% / 0.25);
-    --shadow-card: 0 4px 24px hsl(220 25% 3% / 0.4);
-    --shadow-subtle: 0 2px 12px hsl(220 25% 3% / 0.2);
 
-    --sidebar-background: 0 0% 98%;
+    /* Glassmorphism Gradients - Warmer Tones */
+    --gradient-primary: linear-gradient(135deg, hsl(272 16% 34%) 0%, hsl(0 13% 57%) 100%);
+    --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 230, 210, 0.4) 100%);
+    --gradient-subtle: linear-gradient(180deg, rgba(255, 218, 179, 0.5) 0%, rgba(255, 218, 179, 0.2) 100%);
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --shadow-glow: 0 8px 32px hsl(272 16% 34% / 0.15);
+    --shadow-card: 0 8px 32px 0 rgba(87, 73, 100, 0.1);
+    --shadow-subtle: 0 4px 16px rgba(87, 73, 100, 0.05);
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 26 100% 85%;
+    --sidebar-foreground: 272 16% 34%;
+    --sidebar-primary: 272 16% 34%;
+    --sidebar-primary-foreground: 26 100% 95%;
+    --sidebar-accent: 0 23% 73%;
+    --sidebar-accent-foreground: 272 16% 34%;
+    --sidebar-border: 0 13% 57%;
+    --sidebar-ring: 272 16% 34%;
   }
 
-  .dark {
-    --background: 220 25% 6%;
-    --foreground: 210 40% 98%;
-  }
+  /* Dark mode overrides removed to enforce requested palette */
 }
 
 @layer base {
@@ -87,15 +89,15 @@ All colors MUST be HSL.
   body {
     @apply bg-white text-black;
   }
-  
+
   .no-print {
     display: none !important;
   }
-  
+
   .print-break {
     page-break-after: always;
   }
-  
+
   @page {
     margin: 1cm;
   }
@@ -163,18 +165,24 @@ All colors MUST be HSL.
 
 /* Animated border utilities */
 @keyframes borderPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     border-color: hsl(var(--border));
   }
+
   50% {
     border-color: hsl(var(--primary));
   }
 }
 
 @keyframes borderGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 0 0 hsl(var(--primary) / 0);
   }
+
   50% {
     box-shadow: 0 0 20px 0 hsl(var(--primary) / 0.4);
   }
@@ -190,9 +198,12 @@ All colors MUST be HSL.
 
 /* Glow pulse animation */
 @keyframes glowPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
   }
+
   50% {
     box-shadow: 0 0 20px hsl(var(--primary) / 0.6);
   }
@@ -201,4 +212,3 @@ All colors MUST be HSL.
 .animate-glow-pulse {
   animation: glowPulse 2s ease-in-out infinite;
 }
-

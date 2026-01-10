@@ -24,54 +24,54 @@ export const PhishingDetector = () => {
 
   const analyzeEmail = async () => {
     if (!emailText.trim()) return;
-    
+
     setIsLoading(true);
-    
+
     // Enhanced phishing detection with detailed metrics
     await new Promise(resolve => setTimeout(resolve, 1800));
-    
+
     const reasons: string[] = [];
     let score = 0;
     let keywordMatches = 0;
     let urlIssues = 0;
     let sensitiveRequests = 0;
     let brandImpersonation = false;
-    
+
     // Advanced suspicious keyword detection
     const urgentKeywords = ['urgent', 'immediately', 'action required', 'verify now', 'within 24 hours', 'expires today', 'suspended', 'locked', 'act now'];
     const prizeKeywords = ['winner', 'prize', 'congratulations', 'lottery', 'inheritance', 'millions', 'selected'];
     const threatKeywords = ['account suspended', 'verify account', 'unusual activity', 'security alert', 'confirm identity', 'unauthorized access'];
     const actionKeywords = ['click here', 'download now', 'open attachment', 'update payment', 'confirm password'];
-    
+
     const foundUrgent = urgentKeywords.filter(kw => emailText.toLowerCase().includes(kw));
     const foundPrize = prizeKeywords.filter(kw => emailText.toLowerCase().includes(kw));
     const foundThreat = threatKeywords.filter(kw => emailText.toLowerCase().includes(kw));
     const foundAction = actionKeywords.filter(kw => emailText.toLowerCase().includes(kw));
-    
+
     if (foundUrgent.length > 0) {
       score += foundUrgent.length * 12;
       keywordMatches += foundUrgent.length;
       reasons.push(`⚠️ Creates false urgency: "${foundUrgent.join('", "')}"`);
     }
-    
+
     if (foundPrize.length > 0) {
       score += foundPrize.length * 18;
       keywordMatches += foundPrize.length;
       reasons.push(`🎰 Suspicious prize claims: "${foundPrize.join('", "')}"`);
     }
-    
+
     if (foundThreat.length > 0) {
       score += foundThreat.length * 20;
       keywordMatches += foundThreat.length;
       reasons.push(`🚨 Threatening language: "${foundThreat.join('", "')}"`);
     }
-    
+
     if (foundAction.length > 0) {
       score += foundAction.length * 15;
       keywordMatches += foundAction.length;
       reasons.push(`🔗 Suspicious call-to-action: "${foundAction.join('", "')}"`);
     }
-    
+
     // Check for IP-based URLs
     const ipUrlPattern = /https?:\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g;
     const ipUrls = emailText.match(ipUrlPattern);
@@ -80,7 +80,7 @@ export const PhishingDetector = () => {
       urlIssues += ipUrls.length;
       reasons.push(`🌐 IP-based URLs detected (${ipUrls.length} found) - legitimate sites use domain names`);
     }
-    
+
     // Check for shortened URLs
     const shortUrlPattern = /(bit\.ly|tinyurl|goo\.gl|ow\.ly|t\.co)/gi;
     const shortUrls = emailText.match(shortUrlPattern);
@@ -89,7 +89,7 @@ export const PhishingDetector = () => {
       urlIssues += shortUrls.length;
       reasons.push(`🔗 Shortened URLs detected (${shortUrls.length} found) - could hide malicious destinations`);
     }
-    
+
     // Check for suspicious domain patterns
     const suspiciousDomains = ['.tk', '.ml', '.ga', '.cf', '.gq', '.xyz', '.top', '.club'];
     const foundSuspiciousDomains = suspiciousDomains.filter(domain => emailText.toLowerCase().includes(domain));
@@ -98,7 +98,7 @@ export const PhishingDetector = () => {
       urlIssues += foundSuspiciousDomains.length;
       reasons.push(`⚠️ Free/suspicious domain extensions: ${foundSuspiciousDomains.join(', ')}`);
     }
-    
+
     // Check for domain spoofing (common brand names with variations)
     const brandNames = ['paypal', 'amazon', 'microsoft', 'apple', 'google', 'netflix', 'facebook', 'instagram', 'bank'];
     for (const brand of brandNames) {
@@ -110,7 +110,7 @@ export const PhishingDetector = () => {
         break;
       }
     }
-    
+
     // Check for excessive links
     const linkCount = (emailText.match(/https?:\/\//g) || []).length;
     if (linkCount > 5) {
@@ -118,7 +118,7 @@ export const PhishingDetector = () => {
       urlIssues += 1;
       reasons.push(`🔗 Excessive links detected (${linkCount} links) - unusual for legitimate emails`);
     }
-    
+
     // Check for poor grammar indicators
     const grammarIssues = [
       /dear (customer|user|member|sir|madam|friend)(?!\s+\w+)/i,
@@ -131,7 +131,7 @@ export const PhishingDetector = () => {
       score += 10;
       reasons.push(`📝 Generic/impersonal greetings detected - legitimate companies use your name`);
     }
-    
+
     // Check for requests for sensitive information
     const sensitiveRequests_list = ['password', 'social security', 'ssn', 'credit card', 'bank account', 'pin', 'cvv', 'security code'];
     const foundSensitive = sensitiveRequests_list.filter(term => emailText.toLowerCase().includes(term));
@@ -140,7 +140,7 @@ export const PhishingDetector = () => {
       sensitiveRequests += foundSensitive.length;
       reasons.push(`🔐 Requests sensitive information: ${foundSensitive.join(', ')} - MAJOR RED FLAG`);
     }
-    
+
     // Check for misspellings of common words
     const commonMisspellings = ['kindly', 'dear sir/madam', 'beneficiary', 'urgent matter', 'confirm your identity'];
     const foundMisspellings = commonMisspellings.filter(phrase => emailText.toLowerCase().includes(phrase));
@@ -148,22 +148,22 @@ export const PhishingDetector = () => {
       score += 8;
       reasons.push(`🔤 Suspicious phrasing patterns commonly used in scams`);
     }
-    
+
     // Check for attachments mentions
     if (/attach|download|file|document|pdf|exe|zip/i.test(emailText)) {
       score += 12;
       reasons.push(`📎 Mentions attachments/downloads - verify source before opening`);
     }
-    
+
     // Cap score at 100
     score = Math.min(score, 100);
-    
+
     if (score === 0) {
       reasons.push('✅ No immediate phishing indicators detected - email appears safe');
     }
-    
-    setResult({ 
-      score, 
+
+    setResult({
+      score,
       reasons,
       details: {
         keywordMatches,
@@ -215,7 +215,7 @@ export const PhishingDetector = () => {
           >
             <Shield className="w-12 h-12 text-primary-foreground" />
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
@@ -223,13 +223,13 @@ export const PhishingDetector = () => {
           >
             Phishing Email Detector
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.3 }}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           >
-            Advanced AI-powered analysis to identify phishing attempts, malicious links, and suspicious content
+            Advanced security analysis to identify phishing attempts, malicious links, and suspicious content
           </motion.p>
         </div>
 
@@ -241,7 +241,7 @@ export const PhishingDetector = () => {
           <Card className="p-6 bg-gradient-card border-border shadow-xl backdrop-blur-sm">
             <div className="space-y-4">
               <ExampleEmailSelector onSelectEmail={setEmailText} />
-              
+
               <div>
                 <label htmlFor="email-input" className="text-sm font-medium text-foreground mb-2 block flex items-center gap-2">
                   <BarChart3 className="w-4 h-4 text-primary" />
@@ -265,7 +265,7 @@ export const PhishingDetector = () => {
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Analyzing with AI...
+                      Analyzing content...
                     </>
                   ) : (
                     <>
@@ -274,7 +274,7 @@ export const PhishingDetector = () => {
                     </>
                   )}
                 </Button>
-                
+
                 {(emailText || result) && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -316,13 +316,12 @@ export const PhishingDetector = () => {
                         const color = getScoreColor(result.score);
                         return (
                           <Icon
-                            className={`w-10 h-10 ${
-                              color === 'success'
+                            className={`w-10 h-10 ${color === 'success'
                                 ? 'text-success'
                                 : color === 'warning'
-                                ? 'text-warning'
-                                : 'text-danger'
-                            }`}
+                                  ? 'text-warning'
+                                  : 'text-danger'
+                              }`}
                           />
                         );
                       })()}
@@ -337,13 +336,12 @@ export const PhishingDetector = () => {
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.2, type: 'spring' }}
-                        className={`text-3xl font-bold ${
-                          getScoreColor(result.score) === 'success'
+                        className={`text-3xl font-bold ${getScoreColor(result.score) === 'success'
                             ? 'text-success'
                             : getScoreColor(result.score) === 'warning'
-                            ? 'text-warning'
-                            : 'text-danger'
-                        }`}
+                              ? 'text-warning'
+                              : 'text-danger'
+                          }`}
                       >
                         {result.score}/100
                       </motion.span>
@@ -353,16 +351,15 @@ export const PhishingDetector = () => {
                         initial={{ width: 0 }}
                         animate={{ width: `${result.score}%` }}
                         transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-                        className={`h-full rounded-full shadow-lg ${
-                          getScoreColor(result.score) === 'success'
+                        className={`h-full rounded-full shadow-lg ${getScoreColor(result.score) === 'success'
                             ? 'bg-success'
                             : getScoreColor(result.score) === 'warning'
-                            ? 'bg-warning'
-                            : 'bg-danger'
-                        }`}
+                              ? 'bg-warning'
+                              : 'bg-danger'
+                          }`}
                       />
                     </div>
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.5 }}
@@ -372,8 +369,8 @@ export const PhishingDetector = () => {
                         getScoreColor(result.score) === 'success'
                           ? 'text-success'
                           : getScoreColor(result.score) === 'warning'
-                          ? 'text-warning'
-                          : 'text-danger'
+                            ? 'text-warning'
+                            : 'text-danger'
                       }>{getScoreLabel(result.score)}</span>
                     </motion.p>
                   </div>
@@ -432,24 +429,23 @@ export const PhishingDetector = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1 }}
-                    className={`p-4 rounded-lg border-2 ${
-                      getScoreColor(result.score) === 'success'
+                    className={`p-4 rounded-lg border-2 ${getScoreColor(result.score) === 'success'
                         ? 'bg-success/10 border-success'
                         : getScoreColor(result.score) === 'warning'
-                        ? 'bg-warning/10 border-warning'
-                        : 'bg-danger/10 border-danger'
-                    }`}
+                          ? 'bg-warning/10 border-warning'
+                          : 'bg-danger/10 border-danger'
+                      }`}
                   >
                     <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
                       <Shield className="w-4 h-4" />
                       Security Recommendation
                     </h4>
                     <p className="text-sm text-muted-foreground">
-                      {getScoreColor(result.score) === 'success' 
+                      {getScoreColor(result.score) === 'success'
                         ? 'This email appears safe, but always verify sender addresses and hover over links before clicking.'
                         : getScoreColor(result.score) === 'warning'
-                        ? 'Exercise caution with this email. Verify the sender through official channels before taking any action.'
-                        : '⚠️ HIGH RISK: Do not click any links, download attachments, or provide any information. Report this as phishing.'}
+                          ? 'Exercise caution with this email. Verify the sender through official channels before taking any action.'
+                          : '⚠️ HIGH RISK: Do not click any links, download attachments, or provide any information. Report this as phishing.'}
                     </p>
                   </motion.div>
                 </div>

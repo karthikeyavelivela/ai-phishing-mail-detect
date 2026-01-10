@@ -33,7 +33,7 @@ export const MobileMenu = ({
   const actionItems = [
     { icon: History, label: 'History', onClick: onHistoryClick },
     { icon: Brain, label: 'Quiz Mode', onClick: onQuizClick },
-    { icon: MessageSquare, label: 'AI Assistant', onClick: onAIClick },
+    { icon: MessageSquare, label: 'Security Assistant', onClick: onAIClick },
     { icon: FileText, label: 'Export CSV', onClick: onExportClick, disabled: historyLength === 0 }
   ];
 
@@ -96,9 +96,8 @@ export const MobileMenu = ({
                           <Link to={item.to} onClick={onClose}>
                             <Button
                               variant={isActive ? "default" : "ghost"}
-                              className={`w-full justify-start gap-3 h-12 ${
-                                isActive ? 'shadow-lg shadow-primary/50 animate-glow' : ''
-                              }`}
+                              className={`w-full justify-start gap-3 h-12 ${isActive ? 'shadow-lg shadow-primary/50 animate-glow' : ''
+                                }`}
                             >
                               <Icon className="w-5 h-5" />
                               <span>{item.label}</span>

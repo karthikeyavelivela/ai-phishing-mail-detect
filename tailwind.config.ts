@@ -55,6 +55,10 @@ export default {
         'gradient-primary': 'var(--gradient-primary)',
         'gradient-card': 'var(--gradient-card)',
         'gradient-subtle': 'var(--gradient-subtle)',
+        'glass': 'linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2))',
+      },
+      backdropBlur: {
+        'xs': '2px',
       },
       boxShadow: {
         'glow': 'var(--shadow-glow)',
@@ -104,11 +108,11 @@ export default {
           "50%": { boxShadow: "0 0 40px hsl(var(--primary) / 0.4)" }
         },
         "glow": {
-          "0%, 100%": { 
-            boxShadow: "0 0 15px hsl(var(--primary) / 0.5), 0 0 30px hsl(var(--primary) / 0.3)" 
+          "0%, 100%": {
+            boxShadow: "0 0 15px hsl(var(--primary) / 0.5), 0 0 30px hsl(var(--primary) / 0.3)"
           },
-          "50%": { 
-            boxShadow: "0 0 20px hsl(var(--primary) / 0.7), 0 0 40px hsl(var(--primary) / 0.5)" 
+          "50%": {
+            boxShadow: "0 0 20px hsl(var(--primary) / 0.7), 0 0 40px hsl(var(--primary) / 0.5)"
           }
         },
         "bounce-subtle": {

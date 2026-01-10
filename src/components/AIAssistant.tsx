@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Brain, Send, Loader2, Sparkles, AlertCircle, X } from 'lucide-react';
+import { Shield, Send, Loader2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollArea } from './ui/scroll-area';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
@@ -27,9 +27,9 @@ interface AIAssistantProps {
 
 export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
   const [messages, setMessages] = useState<Message[]>([
-    { 
-      role: 'assistant', 
-      content: 'Hello! 👋 I\'m your AI security expert. Ask me anything about phishing detection, email security, or cybersecurity best practices.' 
+    {
+      role: 'assistant',
+      content: 'Hello! 👋 I\'m your Security Assistant. Ask me anything about phishing detection, email security, or cybersecurity best practices.'
     }
   ]);
   const [input, setInput] = useState('');
@@ -51,8 +51,8 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
-        body: JSON.stringify({ 
-          messages: [...messages, userMessage] 
+        body: JSON.stringify({
+          messages: [...messages, userMessage]
         }),
       });
 
@@ -62,10 +62,10 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
           return;
         }
         if (response.status === 402) {
-          toast.error('AI credits exhausted. Please add credits to continue.');
+          toast.error('Credits exhausted. Please add credits to continue.');
           return;
         }
-        throw new Error('Failed to start AI stream');
+        throw new Error('Failed to start stream');
       }
 
       if (!response.body) {
@@ -105,7 +105,7 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
           try {
             const parsed = JSON.parse(jsonStr);
             const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-            
+
             if (content) {
               assistantContent += content;
               setMessages(prev => {
@@ -131,10 +131,10 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
           if (raw.endsWith('\r')) raw = raw.slice(0, -1);
           if (raw.startsWith(':') || raw.trim() === '') continue;
           if (!raw.startsWith('data: ')) continue;
-          
+
           const jsonStr = raw.slice(6).trim();
           if (jsonStr === '[DONE]') continue;
-          
+
           try {
             const parsed = JSON.parse(jsonStr);
             const content = parsed.choices?.[0]?.delta?.content as string | undefined;
@@ -156,7 +156,7 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
       }
     } catch (error) {
       console.error('Chat error:', error);
-      toast.error('Failed to get AI response. Please try again.');
+      toast.error('Failed to get response. Please try again.');
       // Remove the empty assistant message on error
       setMessages(prev => prev.slice(0, -1));
     } finally {
@@ -182,45 +182,37 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent 
-        className="max-w-4xl w-[90vw] h-[85vh] p-0 gap-0 bg-gradient-to-br from-background via-background to-primary/5 border-2 border-primary/20 shadow-2xl overflow-hidden flex flex-col"
+      <DialogContent
+        className="max-w-4xl w-[90vw] h-[85vh] p-0 gap-0 bg-white/30 backdrop-blur-xl border border-white/40 shadow-2xl overflow-hidden flex flex-col"
         aria-describedby="ai-assistant-description"
       >
         {/* Header */}
-        <div className="bg-gradient-primary px-6 py-4 border-b border-primary/20 flex-shrink-0">
+        <div className="bg-gradient-to-r from-primary/80 to-secondary/80 backdrop-blur-md px-6 py-4 border-b border-white/20 flex-shrink-0 text-white">
           <div className="flex items-center gap-3">
-            <motion.div 
-              className="p-2.5 rounded-xl bg-white/20 backdrop-blur-sm"
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+            <motion.div
+              className="p-2.5 rounded-xl bg-white/20 backdrop-blur-sm shadow-inner"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
             >
-              <Brain className="w-6 h-6 text-white" />
+              <Shield className="w-6 h-6 text-white" />
             </motion.div>
             <div className="flex-1">
-              <DialogTitle className="text-2xl font-bold text-white">
-                AI Security Expert
+              <DialogTitle className="text-2xl font-bold text-white drop-shadow-sm">
+                Security Assistant
               </DialogTitle>
-              <p id="ai-assistant-description" className="text-xs text-white/80">
-                Powered by Google Gemini Flash • Real-time assistance
+              <p id="ai-assistant-description" className="text-xs text-white/90 font-medium">
+                Real-time security analysis & guidance
               </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Sparkles className="w-5 h-5 text-white/90" />
-              </motion.div>
             </div>
           </div>
         </div>
 
         {/* Welcome Message / Suggested Questions */}
         {messages.length === 1 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mx-6 mt-6 p-5 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20"
+            className="mx-6 mt-6 p-5 rounded-2xl bg-white/40 backdrop-blur-sm border border-white/50 shadow-sm"
           >
             <div className="flex items-start gap-3 mb-4">
               <AlertCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
@@ -238,7 +230,7 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
                   variant="outline"
                   size="sm"
                   onClick={() => handleSuggestedQuestion(question)}
-                  className="text-xs bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+                  className="text-xs bg-white/40 hover:bg-primary/20 border-white/50 hover:border-primary/30 transition-all text-foreground"
                   disabled={isLoading}
                 >
                   {question}
@@ -259,25 +251,24 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
                     initial={{ opacity: 0, y: 20, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ 
-                      duration: 0.4, 
+                    transition={{
+                      duration: 0.4,
                       ease: [0.22, 1, 0.36, 1],
-                      delay: index * 0.05 
+                      delay: index * 0.05
                     }}
                     className={`flex w-full ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[80%] rounded-2xl p-4 shadow-lg ${
-                        message.role === 'user'
-                          ? 'bg-gradient-primary text-primary-foreground'
-                          : 'bg-card text-foreground border border-border/50'
-                      }`}
+                      className={`max-w-[80%] rounded-2xl p-4 shadow-sm backdrop-blur-sm ${message.role === 'user'
+                          ? 'bg-primary/90 text-primary-foreground shadow-lg'
+                          : 'bg-white/60 text-foreground border border-white/50'
+                        }`}
                       style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}
                     >
                       {message.role === 'assistant' && (
-                        <div className="flex items-center gap-2 mb-2 pb-2 border-b border-border/30">
-                          <Brain className="w-4 h-4 text-primary flex-shrink-0" />
-                          <span className="text-xs font-semibold text-primary">AI Expert</span>
+                        <div className="flex items-center gap-2 mb-2 pb-2 border-b border-black/5">
+                          <Shield className="w-4 h-4 text-primary flex-shrink-0" />
+                          <span className="text-xs font-semibold text-primary">Security Expert</span>
                         </div>
                       )}
                       <div className="text-sm leading-relaxed" style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', overflowWrap: 'anywhere' }}>
@@ -287,23 +278,18 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
                   </motion.div>
                 ))}
               </AnimatePresence>
-              
+
               {isLoading && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start w-full"
                 >
-                  <div className="bg-card rounded-2xl p-4 border border-border/50 shadow-lg flex items-center gap-3 max-w-[80%]">
+                  <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 shadow-sm flex items-center gap-3 max-w-[80%]">
                     <div className="relative flex-shrink-0">
                       <Loader2 className="w-5 h-5 animate-spin text-primary" />
-                      <motion.div
-                        className="absolute inset-0 rounded-full bg-primary/20"
-                        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      />
                     </div>
-                    <span className="text-sm text-muted-foreground">AI is analyzing your question...</span>
+                    <span className="text-sm text-muted-foreground">Analyzing request...</span>
                   </div>
                 </motion.div>
               )}
@@ -313,7 +299,7 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
 
         {/* Quick Actions */}
         {messages.length > 1 && !isLoading && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="px-6 pb-3 flex-shrink-0"
@@ -325,7 +311,7 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
                   variant="ghost"
                   size="sm"
                   onClick={() => handleSuggestedQuestion(question)}
-                  className="text-xs whitespace-nowrap bg-secondary/30 hover:bg-primary/10 hover:text-primary transition-all flex-shrink-0"
+                  className="text-xs whitespace-nowrap bg-white/30 hover:bg-primary/10 hover:text-primary transition-all flex-shrink-0 border border-transparent hover:border-primary/20"
                 >
                   {question}
                 </Button>
@@ -335,7 +321,7 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
         )}
 
         {/* Input Area */}
-        <div className="px-6 pb-6 pt-2 bg-gradient-to-t from-background/50 to-transparent backdrop-blur-sm border-t border-border/30 flex-shrink-0">
+        <div className="px-6 pb-6 pt-2 bg-white/20 backdrop-blur-md border-t border-white/30 flex-shrink-0">
           <div className="flex gap-3 items-end">
             <div className="flex-1 relative">
               <Input
@@ -350,16 +336,16 @@ export const AIAssistant = ({ isOpen, onClose }: AIAssistantProps) => {
                 placeholder="Ask about phishing, email security, or best practices..."
                 disabled={isLoading}
                 maxLength={500}
-                className="pr-16 bg-background/80 border-border/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all h-12 text-sm rounded-xl"
+                className="pr-16 bg-white/50 border-white/40 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all h-12 text-sm rounded-xl placeholder:text-muted-foreground/70"
               />
               <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">
                 {input.length}/500
               </div>
             </div>
-            <Button 
+            <Button
               onClick={() => handleSend()}
               disabled={!input.trim() || isLoading}
-              className="bg-gradient-primary hover:opacity-90 transition-all shadow-lg hover:shadow-xl h-12 px-6 rounded-xl"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground transition-all shadow-lg hover:shadow-xl h-12 px-6 rounded-xl"
               size="lg"
             >
               {isLoading ? (
