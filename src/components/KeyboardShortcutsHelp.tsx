@@ -11,10 +11,10 @@ export const KeyboardShortcutsHelp = () => {
     { keys: ['Ctrl', 'Enter'], description: 'Analyze email' },
     { keys: ['Esc'], description: 'Clear/Reset analysis' },
     { keys: ['Ctrl', 'K'], description: 'Focus search' },
-    { keys: ['H'], description: 'Toggle history' },
-    { keys: ['Q'], description: 'Open quiz mode' },
-    { keys: ['S'], description: 'Toggle stats' },
-    { keys: ['?'], description: 'Show shortcuts' },
+    { keys: ['Ctrl', 'H'], description: 'Toggle history' },
+    { keys: ['Ctrl', 'Q'], description: 'Open quiz mode' },
+    { keys: ['Ctrl', 'S'], description: 'Toggle stats' },
+    { keys: ['Ctrl', '?'], description: 'Show shortcuts' },
   ];
 
   return (

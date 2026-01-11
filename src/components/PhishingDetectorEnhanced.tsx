@@ -348,9 +348,10 @@ export const PhishingDetectorEnhanced = () => {
     'ctrl+enter': () => emailText.trim() && analyzeEmail(),
     'escape': resetAnalysis,
     'ctrl+k': () => textareaRef.current?.focus(),
-    'h': () => !showAI && setHistoryOpen(true),
-    'q': () => !showAI && setQuizOpen(true),
-    '?': () => setShowShortcutsHelp(!showShortcutsHelp),
+    'ctrl+h': () => !showAI && setHistoryOpen(true),
+    'ctrl+q': () => !showAI && setQuizOpen(true),
+    'ctrl+/': () => setShowShortcutsHelp(!showShortcutsHelp),
+    'ctrl+shift+?': () => setShowShortcutsHelp(!showShortcutsHelp),
     'ctrl+shift+e': () => history.length > 0 && handleExportCSV(),
   });
 
