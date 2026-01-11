@@ -49,7 +49,7 @@ export const KeyboardShortcutsHelp = () => {
                     {shortcut.keys.map((key, i) => (
                       <kbd
                         key={i}
-                        className="px-2 py-1 bg-secondary rounded text-xs font-mono"
+                        className="px-2 py-1 bg-secondary rounded text-xs font-mono text-secondary-foreground"
                       >
                         {key}
                       </kbd>

@@ -512,7 +512,7 @@ export const PhishingDetectorEnhanced = () => {
               role="status"
               aria-live="polite"
             >
-              <kbd className="px-2 py-1 bg-secondary rounded text-xs" aria-label="Control plus Enter">Ctrl+Enter</kbd> to analyze • <kbd className="px-2 py-1 bg-secondary rounded text-xs" aria-label="Escape">Esc</kbd> to clear • <kbd className="px-2 py-1 bg-secondary rounded text-xs" aria-label="Question mark">?</kbd> for shortcuts
+              <kbd className="px-2 py-1 bg-secondary rounded text-xs text-secondary-foreground" aria-label="Control plus Enter">Ctrl+Enter</kbd> to analyze • <kbd className="px-2 py-1 bg-secondary rounded text-xs text-secondary-foreground" aria-label="Escape">Esc</kbd> to clear • <kbd className="px-2 py-1 bg-secondary rounded text-xs text-secondary-foreground" aria-label="Question mark">?</kbd> for shortcuts
             </motion.p>
           </div>
 
